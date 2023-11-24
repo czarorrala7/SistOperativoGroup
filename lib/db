@@ -1,0 +1,163 @@
+import random
+import string
+
+
+class Data:
+    """
+    Almacenamiento de valores posibles para la generacion del formulario
+    """
+    nom_masculinos = [
+        "Liam", "Noah", "Oliver", "Elijah", "Lucas", "Mason", "Ethan", "Sebastian", "Mateo", "Jack",
+        "Alexander", "Jacob", "Michael", "Daniel", "Henry", "Matthew", "Joseph", "Samuel", "David", "John",
+        "Wyatt", "Oscar", "Josiah", "Carlos", "Juan", "Diego", "Adam", "Julian", "Max", "Leo",
+        "Isaac", "Ian", "Alex", "Anthony", "Victor", "Jesus", "Gabriel", "Benjamin", "Caleb", "Miguel",
+        "Ezra", "Andrew", "Aaron", "Evan", "Adrian", "Antonio", "Ayden", "Dominic", "Blake", "Angel",
+        "Joel", "Santiago", "Luis", "Chase", "Cole", "Carson", "Jason", "Damian", "Harrison", "Fernando",
+        "Zachary", "George", "Kenneth", "Andres", "Brayden", "Jaden", "Jeremiah", "Omar", "Giovanni", "Derek",
+        "Cristian", "Collin", "Brady", "Gael", "Ivan", "Martin", "Jared", "Kyle", "Charlie", "Jorge",
+        "Jonas", "Landon", "Edwin", "Allen", "Bryce", "Alan", "Timothy", "Peter", "Israel", "Devin",
+        "Aiden", "Eduardo", "Tristan", "Felix", "Bryant", "Javier", "Rafael", "Marvin", "Kai", "Brent",
+        "Cesar", "Maxwell", "Marco", "Jayce", "Hector", "Riley", "Raymond", "Tony", "Ricardo", "Shane",
+        "Pedro", "Axel", "Arthur", "Leonardo", "Edgar", "Elliot", "Sergio", "Armando", "Elias", "Stanley",
+        "Brayan", "Randy", "Gerardo", "Enrique", "Malachi", "Nick", "Danny", "Erick", "Mauricio", "Dillon",
+        "Griffin", "Emilio", "Finn", "Andy", "Marcus", "Preston", "Marco", "Jesse", "Simon", "Cody",
+        "Micah", "Nathaniel", "Diego", "Jaxon", "Ryder", "Yahir", "Caiden", "Zayden", "Jeffrey", "Freddy",
+        "Phoenix", "Ronald", "Dante", "Dalton", "Keegan", "Ali", "Jaiden", "Rodrigo", "Zion", "August",
+        "Tobias", "Joaquin", "Jamison", "Maximus", "Adan", "Milan", "Phillip", "Alberto", "Gustavo", "Francis"
+    ]
+
+    nom_femeninos = [
+        "Emma", "Olivia", "Ava", "Sophia", "Isabella", "Mia", "Charlotte", "Amelia", "Harper", "Evelyn",
+        "Abigail", "Emily", "Elizabeth", "Sofia", "Avery", "Ella", "Scarlett", "Grace", "Chloe", "Victoria",
+        "Madison", "Luna", "Mila", "Lucy", "Zoey", "Stella", "Natalie", "Anna", "Samantha", "Maria",
+        "Leah", "Audrey", "Ariana", "Lily", "Aria", "Eva", "Julia", "Savannah", "Gabriella", "Valentina",
+        "Nova", "Clara", "Vivian", "Reagan", "Lucia", "Elena", "Alina", "Allison", "Isla", "Sarah",
+        "Eden", "Aaliyah", "Adeline", "Ariel", "Alexa", "Kinsley", "Paisley", "Hailey", "Genesis", "Penelope",
+        "Naomi", "Alyssa", "Elise", "Serena", "Liliana", "Brielle", "Jade", "Camila", "Delilah", "Catherine",
+        "Josephine", "Rose", "Valeria", "Laila", "Nora", "Riley", "Daniela", "Scarlet", "Isabelle", "Annabelle",
+        "Molly", "Michelle", "Nicole", "Angela", "Giselle", "Amber", "Christina", "Elisa", "Francesca", "Diana",
+        "Claudia", "Alma", "Violeta", "Crystal", "Angie", "Vanessa", "Chelsea", "Daisy", "Eliana", "Mariana",
+        "Melissa", "Ashley", "Alondra", "Miranda", "Alejandra", "Sara", "Amy", "Isabel", "Esmeralda", "Paula",
+        "Cynthia", "Laura", "Karla", "Sophie", "Linda", "Megan", "Kiara", "Martha", "Andrea", "Teresa",
+        "Leticia", "Lizbeth", "Guadalupe", "Jacqueline", "Monica", "Alexandra", "Veronica", "Gabriela", "Yesenia", "Anastasia",
+        "Renata", "Brenda", "Fernanda", "Bianca", "Rebecca", "Irene", "Patricia", "Paola", "Daniella", "Juliana",
+        "Athena", "Selena", "Regina", "Lena", "Faith", "Ariadna", "Alison", "Esther", "April", "Frances",
+        "Helen", "Jamie", "Lyla", "Anahi", "Dulce", "Emilia", "Lorena", "Adriana", "Yaretzi", "Priscilla"
+    ]
+
+    correo = [
+        "Smith@gmail.com.ec", "Johnson@gmail.com.ec", "Williams@gmail.com.ec", "Brown@gmail.com.ec", "Jones@gmail.com.ec",
+        "Garcia@gmail.com.ec", "Miller@gmail.com.ec", "Davis@gmail.com.ec", "Rodriguez@gmail.com.ec", "Martinez@gmail.com.ec",
+        "Hernandez@gmail.com.ec", "Lopez@gmail.com.ec", "Gonzalez@gmail.com.ec", "Wilson@gmail.com.ec", "Anderson@gmail.com.ec",
+        "Thomas@gmail.com.ec", "Taylor@gmail.com.ec", "Moore@gmail.com.ec", "Jackson@gmail.com.ec", "Martin@gmail.com.ec",
+        "Lee@gmail.com.ec", "Perez", "Thompson@gmail.com.ec", "White@gmail.com.ec", "Harris@gmail.com.ec",
+        "Sanchez@gmail.com.ec", "Clark@gmail.com.ec", "Ramirez@gmail.com.ec", "Lewis@gmail.com.ec", "Robinson@gmail.com.ec",
+        "Walker@gmail.com.ec", "Young@gmail.com.ec", "Allen@gmail.com.ec", "King@gmail.com.ec", "Wright@gmail.com.ec",
+        "Scott@gmail.com.ec", "Torres@gmail.com.ec", "Nguyen@gmail.com.ec", "Hill@gmail.com.ec", "Flores@gmail.com.ec",
+        "Green@gmail.com.ec", "Adams@gmail.com.ec", "Nelson@gmail.com.ec", "Baker@gmail.com.ec", "Hall@gmail.com.ec",
+        "Rivera@gmail.com.ec", "Campbell@gmail.com.ec", "Mitchell@gmail.com.ec", "Carter@gmail.com.ec", "Roberts@gmail.com.ec",
+        "Gomez@gmail.com.ec", "Phillips@gmail.com.ec", "Evans@gmail.com.ec", "Turner@gmail.com.ec", "Diaz@gmail.com.ec",
+        "Parker@gmail.com.ec", "Cruz@gmail.com.ec", "Edwards@gmail.com.ec", "Collins@gmail.com.ec", "Reyes@gmail.com.ec",
+        "Stewart@gmail.com.ec", "Morris@gmail.com.ec", "Morales@gmail.com.ec", "Murphy@gmail.com.ec", "Cook@gmail.com.ec",
+        "Rogers@gmail.com.ec", "Gutierrez@gmail.com.ec", "Ortiz@gmail.com.ec", "Morgan@gmail.com.ec", "Cooper@gmail.com.ec"
+    ]
+
+    paises_ciudades = [
+        {"pais": "Ecuador", "ciudad": "Quito"},
+        {"pais": "Ecuador", "ciudad": "Guayaquil"},
+        {"pais": "Ecuador", "ciudad": "Cuenca"},
+        {"pais": "Ecuador", "ciudad": "Loja"},
+        {"pais": "Ecuador", "ciudad": "Ambato"},
+        {"pais": "Ecuador", "ciudad": "Manta"},
+        {"pais": "Ecuador", "ciudad": "Portoviejo"},
+        {"pais": "Ecuador", "ciudad": "Machala"},
+        {"pais": "Ecuador", "ciudad": "Esmeraldas"},
+        {"pais": "Ecuador", "ciudad": "Santo Domingo"},
+        {"pais": "Colombia", "ciudad": "Bogota"},
+        {"pais": "Colombia", "ciudad": "Medellin"},
+        {"pais": "Colombia", "ciudad": "Cali"},
+        {"pais": "Colombia", "ciudad": "Barranquilla"},
+        {"pais": "Colombia", "ciudad": "Cartagena"},
+        {"pais": "Colombia", "ciudad": "Cucuta"},
+        {"pais": "Colombia", "ciudad": "Bucaramanga"},
+        {"pais": "Colombia", "ciudad": "Ibague"},
+        {"pais": "Colombia", "ciudad": "Pereira"},
+        {"pais": "Colombia", "ciudad": "Santa Marta"},
+        {"pais": "Peru", "ciudad": "Lima"},
+        {"pais": "Peru", "ciudad": "Arequipa"},
+        {"pais": "Peru", "ciudad": "Trujillo"},
+        {"pais": "Peru", "ciudad": "Chiclayo"},
+        {"pais": "Peru", "ciudad": "Piura"},
+        {"pais": "Peru", "ciudad": "Cusco"},
+        {"pais": "Peru", "ciudad": "Huancayo"},
+        {"pais": "Peru", "ciudad": "Iquitos"},
+        {"pais": "Peru", "ciudad": "Tacna"},
+        {"pais": "Peru", "ciudad": "Ica"},
+        {"pais": "Argentina", "ciudad": "Buenos Aires"},
+        {"pais": "Argentina", "ciudad": "Cordoba"},
+        {"pais": "Argentina", "ciudad": "Rosario"},
+        {"pais": "Argentina", "ciudad": "Mendoza"},
+        {"pais": "Argentina", "ciudad": "Tucuman"},
+        {"pais": "Argentina", "ciudad": "La Plata"},
+        {"pais": "Argentina", "ciudad": "Mar del Plata"},
+        {"pais": "Argentina", "ciudad": "Salta"},
+        {"pais": "Argentina", "ciudad": "Santa Fe"},
+        {"pais": "Argentina", "ciudad": "San Juan"},
+        {"pais": "Brasil", "ciudad": "Sao Paulo"},
+        {"pais": "Brasil", "ciudad": "Rio de Janeiro"},
+        {"pais": "Brasil", "ciudad": "Salvador"},
+        {"pais": "Brasil", "ciudad": "Brasilia"},
+        {"pais": "Brasil", "ciudad": "Fortaleza"},
+        {"pais": "Brasil", "ciudad": "Belo Horizonte"},
+        {"pais": "Brasil", "ciudad": "Manaus"},
+        {"pais": "Brasil", "ciudad": "Curitiba"},
+        {"pais": "Brasil", "ciudad": "Recife"},
+        {"pais": "Brasil", "ciudad": "Porto Alegre"}
+    ]
+
+    generos = ["masculino", "femenino"]
+
+ 
+    cedula = [
+        "0943942359", "0943924159", "0943952359", "0943969359", "0943942153",
+        "0943942459", "0943942459", "0943142359", "0943942964", "09439423174",
+        "0943942559", "0943942859", "0943892359", "0943942123", "0943942318",
+        "0943942659", "094425459", "0943145359", "0943942984", "094394248"
+    ]
+
+
+    def get_genero(self):
+        generos = ["Masculino", "Femenino"]
+        return random.choice(generos)
+
+    def get_nombres(self, genero):
+        if genero == "Masculino":
+            return f"{random.choice(self.nom_masculinos)} {random.choice(self.nom_masculinos)}"
+        elif genero == "Femenino":
+            return f"{random.choice(self.nom_femeninos)} {random.choice(self.nom_femeninos)}"
+        else:
+            return None
+
+    def correo(self):
+        return f"{random.choice(self.correo)}"
+
+    def dirreccion(self):
+        elemento = random.choice(self.paises_ciudades)
+        return f"{elemento['pais']} - {elemento['ciudad']}"
+
+    def cedula(self):
+        cedula = random.randint(0, 1)
+        return random.choice(self.mascotas)
+
+          def get_paises(self):
+        num_paises = random.randint(0, 20)
+        return random.sample(self.paises, num_paises)
+          
+    def get_identificador_pasaporte(self):
+        codigos_paises = ['ECU', 'USA', 'MEX', 'PER', 'COL']
+        codigo_pais = random.choice(codigos_paises)
+        numeros = random.choices(string.digits, k=7)
+        return ''.join([codigo_pais] + numeros)
+
+    def telefono(self):
+        return random.randint(10**8,(10**9)-1)
