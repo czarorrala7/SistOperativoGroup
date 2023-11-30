@@ -1,0 +1,30 @@
+[
+  {
+    "nodo": "nodo1",
+    "rol": "lider",
+    "url": "http://localhost:5231",
+    "estado": "encendido",
+    "puerto": 5231
+  },
+  {
+    "nodo": "nodo2",
+    "rol": "seguidor",
+    "url": "http://localhost:5232",
+    "estado": "encendido",
+    "puerto": 5232
+  },
+  {
+    "nodo": "nodo3",
+    "rol": "seguidor",
+    "url": "http://localhost:5233",
+    "estado": "encendido",
+    "puerto": 5233
+  },
+  {
+    "nodo": "nodo4",
+    "rol": "seguidor",
+    "url": "http://localhost:5234",
+    "estado": "encendido",
+    "puerto": 5234
+  }
+]
