@@ -1,52 +1,38 @@
-from lib.formulario import Formulario
-from  lib.conexion import Conexion
-from  threading import Thread
-import threading
+import json
+from datetime import datetime
 
-class Capture(Thread):
-    """
-    Clase que genera el formulario y lo envia a la cola rabbitMQ.
-    
-    Atributos:
-        max_threads: configura cuantos hilos pueden trabajar en paralelo
-        semaphore: Maneja un control de numeros de hilos trabajando en paralelo
-        
-    Métodos:
-        __init__(): Constructor de la clase
-        run(): Genera la logica de creacion de formulario y envio del mismo a la cola
-        launch_tasks(n): Genera los n hilos de la clase
-    """
-    max_threads = 20
-    semaphore = threading.Semaphore(max_threads)
-    
-    def __init__(self, task_id):        
-        Thread.__init__(self)
-        self.task_id = task_id
-        self.conn = Conexion()
+# Función para obtener un ID único para cada persona
+def obtener_id(i):
+    fecha_hora_actual = datetime.now().strftime("%Y%m%d_%H%M%S")
+    return f"{fecha_hora_actual}_{i}"
 
-    def run(self):
-        print('Proceso {0}'.format(self.task_id))
-        with Capture.semaphore:
-            print(f'Actualmente, hay {Capture.max_threads - Capture.semaphore._value} hilos en ejecución.')
-            #Numero de formularios a generar. A más formularios, demoras más en copiar y procesar.
-            #por eso hice la prueba con 100.
-            for i in range(100):
-                formulario = Formulario()
-                self.conn.send(formulario.formulario_to_json())
-        print('Terminado proceso {} '.format(self.task_id))
-        self.conn.close()
+# Función para crear un archivo JSON con información simulada de personas
+def crear_json(numero):
+    # Lista para almacenar los datos de las personas
+    datos = []
 
-def launch_tasks(n):
-    threads = []
-    for i in range(n):
-        thread = Capture(i)
-        threads.append(thread)
-        thread.start()
+    # Bucle para generar información para el número de personas especificado
+    for i in range(1, numero + 1):
+        # Crear un diccionario con información simulada de una persona
+        persona = {
+            "id": obtener_id(i),
+            "nombre": f"Nombre{i}",
+            "nacionalidad": f"Nacionalidad{i}",
+            "cedula": f"Cedula{i}",
+            "direccion": f"Direccion{i}",
+            "telefono": f"Telefono{i}",
+            "correo": f"Correo{i}@example.com"
+        }
 
-    # Esperar a que todos los hilos terminen
-    for thread in threads:
-        thread.join()
+        # Agregar el diccionario a la lista de datos
+        datos.append(persona)
 
-launch_tasks(1)  # Ejecuta 100 tareas, de 20 en 20.
+    # Guardar la lista de datos en un archivo JSON llamado "salida.json"
+    with open('salida.json', 'w') as archivo:
+        json.dump(datos, archivo, indent=2)
 
-print('Terminado') 
+# Solicitar al usuario ingresar el número de personas que desea generar
+numero_personas = int(input("Ingrese el número de personas: "))
+
+# Llamar a la función para crear el archivo JSON con la cantidad especificada de personas
+crear_json(numero_personas)
