@@ -50,7 +50,7 @@ def callback(ch, method, properties, body):
 
 def leer_cola_y_consolidar():
     # Conexión con el servidor RabbitMQ
-    credentials = pika.PlainCredentials('michael', 'michael')
+    credentials = pika.PlainCredentials('admin', 'admin')
     parameters = pika.ConnectionParameters('192.168.100.134', 5672, '/', credentials)
     connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
